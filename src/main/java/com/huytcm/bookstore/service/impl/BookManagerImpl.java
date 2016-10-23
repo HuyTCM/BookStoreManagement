@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.huytcm.bookstore.constant.BookStatus;
 import com.huytcm.bookstore.dao.IBookDao;
 import com.huytcm.bookstore.model.Author;
 import com.huytcm.bookstore.model.Book;
@@ -52,6 +53,8 @@ public class BookManagerImpl implements IBookManager {
 					List<BookCategory> bookCategories = new ArrayList<BookCategory>();
 					bookCategories.add(category);
 					book.setBookCategories(bookCategories);
+					
+					bookDao.insertBook(book);
 				}
 			}
 			logger.info("[getAllBook] - End: create dummy data");
@@ -59,6 +62,23 @@ public class BookManagerImpl implements IBookManager {
 		}
 		logger.info("[getAllBook] - End");
 		return books;
+	}
+	
+	@Override
+	public void addNewBook(String title, String description, List<Author> authors, List<BookCategory> categories,
+			Calendar publishedDate) {
+		logger.info("[addNewBook] - Start: title = " + title);
+		Book book = new Book();
+		book.setName(title);
+		book.setAuthors(authors);
+		book.setBookCategories(categories);
+		book.setDescription(description);
+		book.setPublishedDate(publishedDate);
+		book.setStatus(BookStatus.AVAILABLE);
+		
+		bookDao.insertBook(book);
+		
+		logger.info("[addNewBook] - End");
 	}
 
 }

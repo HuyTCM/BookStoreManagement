@@ -17,6 +17,30 @@ public class BookDaoImpl extends BaseDaoImpl<Book, Long> implements IBookDao {
 
 	@Override
 	@Transactional
+	public void insertBook(Book book) {
+		logger.info("[insertBook] - Start" + book.getName());
+		insert(book);
+		logger.info("[insertBook] - End");
+	}
+	
+	@Override
+	@Transactional
+	public void updateBook(Book book) {
+		logger.info("[updateBook] - Start: bookId = " + book.getId());
+		update(book);
+		logger.info("[updateBook] - End");
+	}
+	
+	@Override
+	@Transactional
+	public void deleteBook(Book book) {
+		logger.info("[deleteBook] - Start: bookId = " + book.getId());
+		delete(book);
+		logger.info("[deleteBook] - End");
+	}
+	
+	@Override
+	@Transactional
 	public List<Book> getAllBooks() {
 		logger.info("[getAllBooks - Start]");
 		List<Book> listBook = getAll();

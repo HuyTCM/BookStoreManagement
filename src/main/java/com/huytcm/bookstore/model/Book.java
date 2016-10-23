@@ -47,6 +47,9 @@ public class Book implements Serializable {
 	@Column (name = "status")
 	private BookStatus status;
 	
+	@Column (name = "numOfBorrowed", columnDefinition = "int default '0'")
+	private int numOfBorrowed;
+	
 	public Book() {
 		// TODO Auto-generated constructor stub
 	}
