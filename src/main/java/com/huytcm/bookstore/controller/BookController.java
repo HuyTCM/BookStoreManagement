@@ -1,7 +1,10 @@
 package com.huytcm.bookstore.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +43,9 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/addBook")
-	public String addBook(@RequestParam(name = "txtTitle") String txtTitle, @RequestParam(name="txtPublishedDate") String publishDate,
+	public void addBook(@RequestParam(name = "txtTitle") String txtTitle, @RequestParam(name="txtPublishedDate") String publishDate,
 			@RequestParam(name="txtDescription") String txtDescription, @RequestParam(name = "slAuthor") List<String> authors,
-			@RequestParam(name = "slGenre") List<String> category) {
+			@RequestParam(name = "slGenre") List<String> category, HttpServletResponse response) {
 		logger.info("[addBook] - Start");
 		
 		try {
@@ -53,6 +56,12 @@ public class BookController {
 		}
 
 		logger.info("[addBook] - End");
-		return "grid-book";
+		try {
+			response.sendRedirect("grid-book");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		return "grid-book";
 	}
 }
