@@ -20,7 +20,7 @@
 			</h2>
 		</div>
 		<div class="card-body card-padding">
-		<form action="addBook" method="POST">
+		<form action="addBook" method="GET">
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="fileinput fileinput-new" data-provides="fileinput">

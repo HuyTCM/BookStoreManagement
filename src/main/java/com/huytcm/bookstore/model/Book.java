@@ -34,13 +34,13 @@ public class Book implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "listBook", cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "listBook")
 	private List<BookCategory> bookCategories = new ArrayList<BookCategory>();
 
 	@Column(name = "description", length = 4000)
 	private String description;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "books", cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "books")
 	private List<Author> authors = new ArrayList<Author>();
 
 	@Column(name = "publishedDate")

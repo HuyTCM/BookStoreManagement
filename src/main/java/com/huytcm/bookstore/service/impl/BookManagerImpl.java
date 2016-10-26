@@ -93,13 +93,15 @@ public class BookManagerImpl implements IBookManager {
 		bookDao.insertBook(book);
 		
 		for (Author author : authors) {
-			book.getAuthors().add(author);
 			author.getBooks().add(book);
+			book.getAuthors().add(author);
+			
 			authorManager.updateAuthor(author);
 		}
 		for (BookCategory bookCategory : categories) {
-			book.getBookCategories().add(bookCategory);
 			bookCategory.getListBook().add(book);
+			book.getBookCategories().add(bookCategory);
+			
 			bookCategoryManager.updateCategory(bookCategory);
 		}
 		book.setDescription(description);
