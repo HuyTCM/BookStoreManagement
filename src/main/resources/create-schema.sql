@@ -1,0 +1,1 @@
+CREATE SCHEMA `system_book_store_management_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
