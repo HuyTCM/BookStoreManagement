@@ -14,6 +14,14 @@ import com.huytcm.bookstore.model.Book;
 public class BookDaoImpl extends BaseDaoImpl<Book, Long> implements IBookDao {
 
 	private static final Logger logger = Logger.getLogger(BookDaoImpl.class.getName());
+	
+	public BookDaoImpl (Class<Book> clazz) {
+		super(clazz);
+	}
+	
+	public BookDaoImpl() {
+		setClazz(Book.class);
+	}
 
 	@Override
 	@Transactional

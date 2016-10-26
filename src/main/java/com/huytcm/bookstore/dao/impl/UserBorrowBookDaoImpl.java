@@ -5,14 +5,24 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.huytcm.bookstore.dao.IUserBorrowBookDao;
 import com.huytcm.bookstore.model.User;
 import com.huytcm.bookstore.model.UserBorrowBook;
 
+@Repository
 public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> implements IUserBorrowBookDao {
 
 	private static final Logger logger = Logger.getLogger(UserBorrowBookDaoImpl.class.getName());
+	
+	public UserBorrowBookDaoImpl (Class<UserBorrowBook> clazz) {
+		super(clazz);
+	}
+	
+	public UserBorrowBookDaoImpl() {
+		setClazz(UserBorrowBook.class);
+	}
 	
 	@Override
 	public void insertUserBorrowBook(UserBorrowBook userBorrowBook) {

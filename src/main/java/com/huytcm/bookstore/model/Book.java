@@ -109,5 +109,13 @@ public class Book implements Serializable {
 	public void setStatus(BookStatus status) {
 		this.status = status;
 	}
+
+	public int getNumOfBorrowed() {
+		return numOfBorrowed;
+	}
+
+	public void setNumOfBorrowed(int numOfBorrowed) {
+		this.numOfBorrowed = numOfBorrowed;
+	}
 	
 }

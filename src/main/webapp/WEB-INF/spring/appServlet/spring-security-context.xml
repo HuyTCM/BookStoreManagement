@@ -10,17 +10,16 @@
 	<beans:bean id="myUserDetailsService" 
 	class="com.huytcm.bookstore.service.impl.UserDetailsServiceImpl"></beans:bean>
 
-	<http pattern="/resources/**" security="none"/>
-	<http pattern="/login" security="none"/>
 	<!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
 		<headers>
-			<frame-options policy="SAMEORIGIN" />
+			<frame-options disabled="true"/>
 		</headers>
 		<intercept-url pattern="/" access="isAuthenticated()" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/config" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/manageAccount" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/*" access="isAuthenticated()" />
-		<!-- <intercept-url pattern="/config" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/manageAccount" access="hasRole('ADMIN')" /> -->
 		
 
 		<!-- access denied page -->
@@ -36,7 +35,7 @@
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="myUserDetailsService">
-			<password-encoder hash="md5"/>
+			<!-- <password-encoder hash="md5"/> -->
 		</authentication-provider>
 	</authentication-manager>
 

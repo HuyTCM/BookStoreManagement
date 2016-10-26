@@ -15,6 +15,14 @@ public class AuthorDaoImpl extends BaseDaoImpl<Author, Long> implements IAuthorD
 
 	private static final Logger logger = Logger.getLogger(AuthorDaoImpl.class.getName());
 	
+	public AuthorDaoImpl (Class<Author> clazz) {
+		super(clazz);
+	}
+	
+	public AuthorDaoImpl() {
+		setClazz(Author.class);
+	}
+	
 	@Override
 	@Transactional
 	public void insertAuthor(Author author) {

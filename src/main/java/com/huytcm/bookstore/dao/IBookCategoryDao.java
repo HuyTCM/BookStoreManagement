@@ -8,5 +8,6 @@ public interface IBookCategoryDao {
 	
 	void insertBookCategory(BookCategory bookCategory);
 	
+	BookCategory getCategoryById(long id);
 	List<BookCategory> getAllBookCategory();
 }

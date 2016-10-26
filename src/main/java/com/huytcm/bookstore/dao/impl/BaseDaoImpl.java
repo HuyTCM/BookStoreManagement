@@ -27,7 +27,6 @@ public class BaseDaoImpl <Model, Id> implements IBaseDao<Model, Id> {
 	}
 	
 	public BaseDaoImpl(Class<Model> clazz) {
-		super();
 		this.clazz = clazz;
 	}
 	

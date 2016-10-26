@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.huytcm.bookstore.dao.IUserBorrowBookDao;
 import com.huytcm.bookstore.model.Book;
@@ -11,6 +12,7 @@ import com.huytcm.bookstore.model.User;
 import com.huytcm.bookstore.model.UserBorrowBook;
 import com.huytcm.bookstore.service.IBorrowBookManager;
 
+@Service
 public class BorrowBookManagerImpl implements IBorrowBookManager {
 
 	private static final Logger logger = Logger.getLogger(BorrowBookManagerImpl.class.getName());

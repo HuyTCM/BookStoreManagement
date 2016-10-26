@@ -14,6 +14,14 @@ import com.huytcm.bookstore.model.User;
 public class UserDaoImpl extends BaseDaoImpl<User, Id> implements IUserDao {
 	private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
 	
+	public UserDaoImpl (Class<User> clazz) {
+		super(clazz);
+	}
+	
+	public UserDaoImpl() {
+		setClazz(User.class);
+	}
+	
 	@Override
 	@Transactional
 	public User getByUsername(String username) {

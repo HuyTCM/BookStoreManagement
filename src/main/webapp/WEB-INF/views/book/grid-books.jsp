@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="BOOKS" value="${BOOKS}" />
 <div class="container">
 	<div class="c-header">
 		<h2>Contacts</h2>
@@ -10,545 +14,43 @@
 
 		<div class="card-body card-padding">
 			<div class="contacts clearfix row">
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/1.jpg"
-							alt="">
-						</a>
+				<c:if test="${not empty BOOKS}">
+					<c:forEach var="book" items="${BOOKS}">
+						<div class="col-md-2 col-sm-4 col-xs-6">
+							<div class="c-item">
+								<a href="#" class="ci-avatar"> <img src="img/contacts/1.jpg"
+									alt="">
+								</a>
 
-						<div class="c-info">
-							<strong>Cathy Shelton</strong> <small>cathy.shelton31@example.com</small>
+								<div class="c-info">
+									<strong>${book.name}</strong> <small>${book.description}</small>
+								</div>
+								
+								<c:set var="authorNames" value=""/>
+								<c:forEach var="author" items="${book.authors}">
+									<c:set var="authorNames" value="${authorNames}, ${author.name}"/>
+								</c:forEach>
+								
+								<c:set var="categoryNames" value=""/>
+								<c:forEach var="category" items="${book.bookCategories}">
+									<c:set var="categoryNames" value="${categoryNames}, ${category.name}"/>
+								</c:forEach>
+
+								<div class="c-footer">
+									<a data-toggle="modal" data-book-id="${book.id}"
+										data-book-title="${book.name}"
+										data-book-description="${book.description}"
+										data-book-authors="${authorNames}"
+										data-book-categories="${categoryNames}"
+										data-book-published-date=<fmt:formatDate type="both" dateStyle="full" value="${book.publishedDate.time}" pattern="dd/mm/yyyy"/>
+										data-book-num-of-borrowed="${book.numOfBorrowed}"
+										href="#modalDefault" style="width: 100%;"
+										class="btn btn-sm btn-default waves-effect"> Detail </a>
+								</div>
+							</div>
 						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/2.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Stella Flores</strong> <small>stella@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/3.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Marilyn Thomas</strong> <small>marilyn@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/4.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Dwight Gilbert</strong> <small>dwight@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/5.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Cody Moreno</strong> <small>moreno@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/6.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Jamie Freeman</strong> <small>freeman@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/7.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Charles Spencer</strong> <small>charles@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/8.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Vickie Reed</strong> <small>reed@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/9.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Lauren Ruiz</strong> <small>ruiz@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/10.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Marlene Vasquez</strong> <small>vasquez@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/11.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Loretta Morrisonz</strong> <small>morrisonz@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/12.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Yvonne Wood</strong> <small>wood@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/13.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Denise Franklin</strong> <small>franklin@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/14.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Joseph Gonzalez</strong> <small>gonzalez@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/15.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Rick Graham</strong> <small>graham@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/16.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Alexander Bailey</strong> <small>bailey@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/1.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Cathy Shelton</strong> <small>cathy.shelton31@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/2.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Stella Flores</strong> <small>stella@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/3.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Marilyn Thomas</strong> <small>marilyn@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/4.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Dwight Gilbert</strong> <small>dwight@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/5.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Cody Moreno</strong> <small>moreno@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/6.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Jamie Freeman</strong> <small>freeman@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/7.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Charles Spencer</strong> <small>charles@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/8.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Vickie Reed</strong> <small>reed@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/9.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Lauren Ruiz</strong> <small>ruiz@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/10.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Marlene Vasquez</strong> <small>vasquez@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/11.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Loretta Morrisonz</strong> <small>morrisonz@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/12.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Yvonne Wood</strong> <small>wood@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/13.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Denise Franklin</strong> <small>franklin@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<div class="c-item">
-						<a href="#" class="ci-avatar"> <img src="img/contacts/14.jpg"
-							alt="">
-						</a>
-
-						<div class="c-info">
-							<strong>Joseph Gonzalez</strong> <small>gonzalez@example.com</small>
-						</div>
-
-						<div class="c-footer">
-							<button class="waves-effect">
-								<i class="zmdi zmdi-person-add"></i> Add
-							</button>
-						</div>
-					</div>
-				</div>
-
+					</c:forEach>
+				</c:if>
 			</div>
 
 			<div class="load-more">
@@ -557,3 +59,70 @@
 		</div>
 	</div>
 </div>
+<!-- Modal Default -->
+<div class="modal fade" id="modalDefault" tabindex="-1" role="dialog"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<div class="card" id="profile-main">
+					<div class="pm-overview c-overflow">
+						<div class="pmo-pic" style="margin-bottom: 0; margin-top: 0;">
+							<div class="p-relative">
+								<a href="#"> <img class="img-responsive"
+									src="img/profile-pics/profile-pic-2.jpg" alt="">
+								</a>
+
+								<div class="dropdown pmop-message">
+									<a data-toggle="dropdown" href="#"
+										class="btn palette-White bg btn-float z-depth-1"> <i
+										class="zmdi zmdi-comment-text-alt"></i>
+									</a>
+								</div>
+							</div>
+							<div class="pmo-stat">
+								<h2 class="m-0 c-white" id="num-of-borrowed">1562</h2>
+								Number of borrow times
+							</div>
+						</div>
+
+						<div class="pmo-block pmo-contact hidden-xs"
+							style="padding-top: 10px;">
+							<h2>Description</h2>
+							<ul>
+								<li><i class="zmdi zmdi-calendar-alt"></i> <span id="book-published-date"></span></li>
+								<li><i class="zmdi zmdi-email"></i> <span id="book-authors"></span></li>
+								<li><i class="zmdi zmdi-facebook-box"></i> <span id="book-categories"></span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="pm-body clearfix">
+						<ul class="tab-nav tn-justified">
+							<li class="active waves-effect"><a href="#">About</a></li>
+						</ul>
+						<div class="pmb-block">
+							<div class="pmbb-header">
+								<h2>
+									<i class="zmdi zmdi-equalizer m-r-5"></i> Summary
+								</h2>
+							</div>
+							<div class="pmbb-body p-l-30">
+								<div class="pmbb-view" id="book-description"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-link">Save changes</button>
+				<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script
+	src="${pageContext.request.contextPath}/resources/js/grid-book.js"></script>

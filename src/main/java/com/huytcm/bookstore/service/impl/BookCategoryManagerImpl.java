@@ -4,17 +4,30 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.huytcm.bookstore.dao.IBookCategoryDao;
 import com.huytcm.bookstore.model.BookCategory;
 import com.huytcm.bookstore.service.IBookCategoryManager;
 
+@Service
 public class BookCategoryManagerImpl implements IBookCategoryManager {
 	
 	private static final Logger logger = Logger.getLogger(BookCategoryManagerImpl.class.getName());
 
 	@Autowired
 	private IBookCategoryDao bookCategoryDao;
+	
+	@Override
+	public BookCategory bookCategoryById(String id) {
+		logger.info("[bookCategoryById] - Start: id = " + id);
+		
+		long idValue = Long.parseLong(id);
+		BookCategory category = bookCategoryDao.getCategoryById(idValue);
+		
+		logger.info("[bookCategoryById] - End");
+		return category;
+	}
 	
 	@Override
 	public List<BookCategory> getAllBookCategory() {
