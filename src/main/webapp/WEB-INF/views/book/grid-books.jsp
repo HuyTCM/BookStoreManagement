@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="BOOKS" value="${BOOKS}" />
 <div class="container">
@@ -24,23 +24,23 @@
 
 								<div class="c-info">
 									<strong>${book.name}</strong> <small>${book.description}</small>
+									<c:set var="authorNames" value="" />
+									<c:forEach var="author" items="${book.authors}">
+										<c:set var="authorNames"
+											value="${authorNames}, ${author.name}" />
+									</c:forEach>
+									<c:set var="categoryNames" value="" />
+									<c:forEach var="category" items="${book.bookCategories}">
+										<c:set var="categoryNames"
+											value="${categoryNames}, ${category.name}" />
+									</c:forEach>
 								</div>
-								
-								<c:set var="authorNames" value=""/>
-								<c:forEach var="author" items="${book.authors}">
-									<c:set var="authorNames" value="${authorNames}, ${author.name}"/>
-								</c:forEach>
-								
-								<c:set var="categoryNames" value=""/>
-								<c:forEach var="category" items="${book.bookCategories}">
-									<c:set var="categoryNames" value="${categoryNames}, ${category.name}"/>
-								</c:forEach>
 
 								<div class="c-footer">
 									<a data-toggle="modal" data-book-id="${book.id}"
 										data-book-title="${book.name}"
 										data-book-description="${book.description}"
-										data-book-authors="${authorNames}"
+										data-book-authors="<c:out value="${authorNames}"/>"
 										data-book-categories="${categoryNames}"
 										data-book-published-date=<fmt:formatDate type="both" dateStyle="full" value="${book.publishedDate.time}" pattern="dd/mm/yyyy"/>
 										data-book-num-of-borrowed="${book.numOfBorrowed}"
@@ -93,9 +93,11 @@
 							style="padding-top: 10px;">
 							<h2>Description</h2>
 							<ul>
-								<li><i class="zmdi zmdi-calendar-alt"></i> <span id="book-published-date"></span></li>
+								<li><i class="zmdi zmdi-calendar-alt"></i> <span
+									id="book-published-date"></span></li>
 								<li><i class="zmdi zmdi-email"></i> <span id="book-authors"></span></li>
-								<li><i class="zmdi zmdi-facebook-box"></i> <span id="book-categories"></span></li>
+								<li><i class="zmdi zmdi-facebook-box"></i> <span
+									id="book-categories"></span></li>
 							</ul>
 						</div>
 					</div>

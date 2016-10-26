@@ -33,6 +33,14 @@ public class AuthorDaoImpl extends BaseDaoImpl<Author, Long> implements IAuthorD
 	
 	@Override
 	@Transactional
+	public void updateAuthor(Author author) {
+		logger.info("[updateAuthor] - Start");
+		update(author);
+		logger.info("[updateAuthor] - End");
+	}
+	
+	@Override
+	@Transactional
 	public List<Author> getAllAuthor() {
 		logger.info("[getAllAuthor] - Start");
 		List<Author> listAuthor = getAll();

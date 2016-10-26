@@ -19,6 +19,13 @@ public class BookCategoryManagerImpl implements IBookCategoryManager {
 	private IBookCategoryDao bookCategoryDao;
 	
 	@Override
+	public void updateCategory(BookCategory category) {
+		logger.info("[updateCategory] - Start");
+		bookCategoryDao.updateBookCategory(category);
+		logger.info("[updateCategory] - End");
+	}
+	
+	@Override
 	public BookCategory bookCategoryById(String id) {
 		logger.info("[bookCategoryById] - Start: id = " + id);
 		

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.huytcm.bookstore.model.Author;
 import com.huytcm.bookstore.model.Book;
 import com.huytcm.bookstore.service.IBookManager;
 
@@ -35,6 +36,12 @@ public class BookController {
 	@RequestMapping(value = "/grid-book")
 	public String getGridListBook(Model model) {
 		List<Book> listBook = bookManager.getAllBook();
+		for (Book book : listBook) {
+			logger.info(book.getName());
+			for(Author author : book.getAuthors()) {
+				logger.info(author.getName());
+			}
+		}
 		model.addAttribute("BOOKS", listBook);
 		return "grid-book";
 	}

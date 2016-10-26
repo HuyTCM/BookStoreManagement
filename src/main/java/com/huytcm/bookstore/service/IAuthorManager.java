@@ -6,6 +6,8 @@ import com.huytcm.bookstore.model.Author;
 
 public interface IAuthorManager {
 	
+	void updateAuthor(Author author);
+	
 	Author getAuthorById(String id);
 	List<Author> getAllAuthor();
 }

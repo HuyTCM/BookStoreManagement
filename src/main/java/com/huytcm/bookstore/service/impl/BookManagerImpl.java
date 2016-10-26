@@ -44,21 +44,9 @@ public class BookManagerImpl implements IBookManager {
 
 			for (BookCategory category : categories) {
 				for (Author author : authors) {
-					Book book = new Book();
 					String bookName = "Book about " + category.getName() + " of " + author.getName();
-					book.setName(bookName);
-					book.setPublishedDate(Calendar.getInstance());
-					book.setDescription("Book name " + bookName + " with short description about this book.");
-
-					List<Author> bookAuthors = new ArrayList<Author>();
-					bookAuthors.add(author);
-					book.setAuthors(bookAuthors);
-
-					List<BookCategory> bookCategories = new ArrayList<BookCategory>();
-					bookCategories.add(category);
-					book.setBookCategories(bookCategories);
-
-					bookDao.insertBook(book);
+					String description = "Book name " + bookName + " with short description about this book.";
+					addBook(bookName, description, authors, categories, Calendar.getInstance());
 				}
 			}
 			logger.info("[getAllBook] - End: create dummy data");
@@ -101,13 +89,24 @@ public class BookManagerImpl implements IBookManager {
 		logger.info("[addBook] - Start: title = " + title);
 		Book book = new Book();
 		book.setName(title);
-		book.setAuthors(authors);
-		book.setBookCategories(categories);
+		
+		bookDao.insertBook(book);
+		
+		for (Author author : authors) {
+			book.getAuthors().add(author);
+			author.getBooks().add(book);
+			authorManager.updateAuthor(author);
+		}
+		for (BookCategory bookCategory : categories) {
+			book.getBookCategories().add(bookCategory);
+			bookCategory.getListBook().add(book);
+			bookCategoryManager.updateCategory(bookCategory);
+		}
 		book.setDescription(description);
 		book.setPublishedDate(publishedDate);
 		book.setStatus(BookStatus.AVAILABLE);
 
-		bookDao.insertBook(book);
+		bookDao.updateBook(book);
 
 		logger.info("[addBook] - End");
 	}

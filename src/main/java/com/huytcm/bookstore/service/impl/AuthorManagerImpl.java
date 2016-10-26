@@ -19,6 +19,13 @@ public class AuthorManagerImpl implements IAuthorManager {
 	private IAuthorDao authorDao;
 	
 	@Override
+	public void updateAuthor(Author author) {
+		logger.info("[updateAuthor] - Start: author = " + author.getId());
+		authorDao.updateAuthor(author);
+		logger.info("[updateAuthor] - End");
+	}
+	
+	@Override
 	public Author getAuthorById(String id) {
 		logger.info("[getAuthorById] - Start: id = " + id);
 		

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,40 +18,40 @@ import javax.persistence.Table;
 import com.huytcm.bookstore.constant.BookStatus;
 
 @Entity
-@Table (name = "Book")
+@Table(name = "Book")
 public class Book implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@Column (name = "id", nullable = false)
+	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column (name = "name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@ManyToMany (mappedBy = "listBook")
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "listBook", cascade = CascadeType.ALL)
 	private List<BookCategory> bookCategories = new ArrayList<BookCategory>();
-	
-	@Column (name = "description", length = 4000)
+
+	@Column(name = "description", length = 4000)
 	private String description;
-	
-	@ManyToMany (mappedBy="books")
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "books", cascade = CascadeType.ALL)
 	private List<Author> authors = new ArrayList<Author>();
-	
-	@Column (name = "publishedDate")
+
+	@Column(name = "publishedDate")
 	private Calendar publishedDate;
-	
-	@Column (name = "status")
+
+	@Column(name = "status")
 	private BookStatus status;
-	
-	@Column (name = "numOfBorrowed", columnDefinition = "int default '0'")
+
+	@Column(name = "numOfBorrowed", columnDefinition = "int default '0'")
 	private int numOfBorrowed;
-	
+
 	public Book() {
 		// TODO Auto-generated constructor stub
 	}
@@ -117,5 +119,5 @@ public class Book implements Serializable {
 	public void setNumOfBorrowed(int numOfBorrowed) {
 		this.numOfBorrowed = numOfBorrowed;
 	}
-	
+
 }

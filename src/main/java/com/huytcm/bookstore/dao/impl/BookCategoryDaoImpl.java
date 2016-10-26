@@ -33,6 +33,14 @@ public class BookCategoryDaoImpl extends BaseDaoImpl<BookCategory, Long> impleme
 	
 	@Override
 	@Transactional
+	public void updateBookCategory(BookCategory bookCategory) {
+		logger.info("[updateBookCategory] - Start");
+		update(bookCategory);
+		logger.info("[updateBookCategory] - End");
+	}
+	
+	@Override
+	@Transactional
 	public BookCategory getCategoryById(long id) {
 		logger.info("[getCategoryById] - Start: id =" + id);
 		BookCategory category = (BookCategory)getById(id);
