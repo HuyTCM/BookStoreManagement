@@ -119,12 +119,48 @@
 				</div>
 			</div>
 			<div class="modal-footer">
+				<button id="btn-modal-save" type="button" class="btn btn-link"
+					data-toggle="modal" data-target="#modalNarrower"
+					data-dismiss="modal">Save changes</button>
+				<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Small -->
+<div class="modal fade" id="modalNarrower" tabindex="-1" role="dialog"
+	aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="padding-top: 20%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<form action="" method="get">
+					<input id="txtBookId" type="hidden" name="txtBookId" />
+					<p class="c-black f-500 m-b-20">From date</p>
+
+					<div class="input-group form-group">
+						<span class="input-group-addon"><i
+							class="zmdi zmdi-calendar"></i></span>
+						<div class="dtp-container fg-line">
+							<input type='text' name="txtFromDate"
+								class="form-control date-picker" placeholder="Click here...">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
 				<button type="button" class="btn btn-link">Save changes</button>
 				<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script
+	src="${pageContext.request.contextPath}/resources/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/grid-book.js"></script>
