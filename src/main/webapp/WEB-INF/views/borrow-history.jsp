@@ -2,6 +2,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="HISTORIES" value="${HISTORIES}" />
+<script>
+function getBookName(bookId, historyId) {
+	$.ajax({
+		url : "book-name",
+		data : {
+			'bookId' : bookId
+		},
+		success : function(result) {
+			$('#book-name-' + bookId + '-' + historyId).text(result);
+		}
+	})
+}
+</script>
 <div class="container">
 	<div class="c-header"></div>
 	<div class="card">
@@ -43,20 +56,9 @@
 						<tr data-row-id="${history.id}">
 							<td class="text-left" style="">${history.bookId}</td>
 							<td class="text-left" style="">
-							<span id="book-name-${history.bookId}"></span>
+							<span id="book-name-${history.bookId}-${history.id}"></span>
 							<script>
-									getBookName('${history.bookId}');
-									function getBookName(bookId) {
-										$.ajax({
-											url : "book-name",
-											data : {
-												'bookId' : bookId
-											},
-											success : function(result) {
-												$('#book-name-' + bookId).text(result);
-											}
-										})
-									}
+									getBookName('${history.bookId}', '${history.id}');
 								</script>
 							</td>
 							<td class="text-left" style=""><fmt:formatDate

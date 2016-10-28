@@ -55,6 +55,7 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 	}
 	
 	@Override
+	@Transactional
 	public List<UserBorrowBook> getAll() {
 		return super.getAll();
 	}

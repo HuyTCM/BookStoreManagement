@@ -2,6 +2,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="HISTORIES" value="${ALLHISTORIES}" />
+<script>
+	function getBookName(bookId, historyId) {
+		$.ajax({
+			url : "book-name",
+			data : {
+				'bookId' : bookId
+			},
+			success : function(result) {
+				$('#book-name-' + bookId + '-' + historyId).text(result);
+			}
+		})
+	}
+	function getUsername(userId, historyId) {
+		$.ajax({
+			url : "user-name",
+			data : {
+				'userId' : userId
+			},
+			success : function(result) {
+				$('#user-name-' + userId + '-' + historyId).text(result);
+			}
+		})
+	}
+</script>
 <div class="container">
 	<div class="c-header"></div>
 	<div class="card">
@@ -13,9 +37,7 @@
 
 		<div id="data-table-command-header"
 			class="bootgrid-header container-fluid">
-			<div class="row">
-			
-			</div>
+			<div class="row"></div>
 		</div>
 		<table id="data-table-command"
 			class="table table-striped table-vmiddle bootgrid-table"
@@ -24,7 +46,7 @@
 				<tr>
 					<th data-column-id="id" class="text-left" style=""><a
 						href="javascript:void(0);" class="column-header-anchor sortable"><span
-							class="text">Book ID</span><span class="zmdi icon "></span></a></th>
+							class="text">User</span><span class="zmdi icon "></span></a></th>
 					<th data-column-id="sender" class="text-left" style=""><a
 						href="javascript:void(0);" class="column-header-anchor sortable"><span
 							class="text">Book title</span><span class="zmdi icon "></span></a></th>
@@ -41,35 +63,28 @@
 				<c:if test="${not empty  HISTORIES}">
 					<c:forEach var="history" items="${HISTORIES}">
 						<tr data-row-id="${history.id}">
-							<td class="text-left" style="">${history.bookId}</td>
-							<td class="text-left" style="">
-							<span id="book-name-${history.bookId}"></span>
-							<script>
-									getBookName('${history.bookId}');
-									function getBookName(bookId) {
-										$.ajax({
-											url : "book-name",
-											data : {
-												'bookId' : bookId
-											},
-											success : function(result) {
-												$('#book-name-' + bookId).text(result);
-											}
-										})
-									}
-								</script>
-							</td>
+							<td class="text-left" style=""><span
+								id="user-name-${history.userId}-${history.id}"></span> <script>
+									getUsername('${history.userId}',
+											'${history.id}');
+								</script></td>
+							<td class="text-left" style=""><span
+								id="book-name-${history.bookId}-${history.id}"></span> <script>
+									getBookName('${history.bookId}',
+											'${history.id}');
+								</script></td>
 							<td class="text-left" style=""><fmt:formatDate
 									value="${history.borrowedDate.time}" type="date"
 									pattern="dd/mm/yyyy" /></td>
 							<td class="text-left" style=""><button type="button"
 									class="btn command-edit waves-effect"
 									data-book-id="${history.bookId}"
+									data-user-id="${history.userId}"
 									<c:if test="${not history.isReturned}">
 										data-toggle="modal"
 										href="#modalNarrower"
 									</c:if>
-									style="color : black;">
+									style="color: black;">
 									<c:if test="${history.isReturned}">
 										Returned
 									</c:if>
@@ -84,9 +99,7 @@
 		</table>
 		<div id="data-table-command-footer"
 			class="bootgrid-footer container-fluid">
-			<div class="row">
-
-			</div>
+			<div class="row"></div>
 		</div>
 	</div>
 </div>
@@ -101,8 +114,8 @@
 			</div>
 			<form action="return-book" method="get">
 				<div class="modal-body">
-
-					<input id="txtBookId" type="hidden" name="txtBookId" />
+					<input id="txtUserId" type="hidden" name="txtUserId" /> <input
+						id="txtBookId" type="hidden" name="txtBookId" />
 					<p class="c-black f-500 m-b-20">Date</p>
 
 					<div class="input-group form-group">
@@ -124,8 +137,16 @@
 	</div>
 </div>
 
-<script
-				src="${pageContext.request.contextPath}/resources/js/borrow-history.js"></script>
+<script>
+	(function() {
+		$('#modalNarrower').on('show.bs.modal', function(e) {
+			var book = e.relatedTarget.dataset.bookId;
+			var user = e.relatedTarget.dataset.userId;
+			$('#txtBookId').val(book);
+			$('#txtUserId').val(user);
+		});
+	}).call();
+</script>
 <script
 	src="${pageContext.request.contextPath}/resources/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 

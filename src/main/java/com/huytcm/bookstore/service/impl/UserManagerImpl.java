@@ -16,6 +16,12 @@ public class UserManagerImpl implements IUserManager {
 	@Autowired 
 	IUserDao userDao;
 	
+	
+	@Override
+	public User getUserbyId(long id) {
+		return userDao.getUserbyId(id);
+	}
+	
 	@Override
 	public User getUserByUsername(String username) {
 		logger.info("[getUserByUsername] - Start - End");

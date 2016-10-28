@@ -87,6 +87,14 @@ public class BookController {
 		Book book = bookManager.getBookById(id);
 		return book.getName();
 	}
+	
+	@RequestMapping(value = "/user-name")
+	public @ResponseBody String getUsername(@RequestParam(name = "userId") String userId) {
+		long id = Long.parseLong(userId);
+		logger.info("[getUsername] - Start: id =" + id);
+		User user = userManager.getUserbyId(id);
+		return user.getUsername();
+	}
 
 	@RequestMapping(value = "/borrow-book")
 	public void borrowBook(@RequestParam(name = "txtBookId") String bookId,
@@ -118,13 +126,19 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/return-book")
-	public void returnBook(@RequestParam(name = "txtBookId") String bookId,
+	public void returnBook(@RequestParam(name = "txtBookId") String bookId,@RequestParam(name = "txtUserId", required = false) String userId,
 			@RequestParam(name = "txtFromDate") String fromDateStr, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 
-		User user = userManager.getUserByUsername(username);
+		User user;
+		if (userId != null) {
+			long id = Long.parseLong(userId);
+			user = userManager.getUserbyId(id);
+		} else {
+			user = userManager.getUserByUsername(username);
+		}
 		logger.info("username = " + user.getUsername());
 		long id = Long.parseLong(bookId);
 		Book book = bookManager.getBookById(id);
