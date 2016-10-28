@@ -1,6 +1,7 @@
 package com.huytcm.bookstore.service.impl;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +60,11 @@ public class BorrowBookManagerImpl implements IBorrowBookManager {
 		logger.info("[userReturnBook] - End");
 	}
 
+	@Override
+	public List<UserBorrowBook> getAllBorrowHistoryByUser(User user) {
+		logger.info("[getAllBorrowHistoryByUser] - Start: userId = " + user.getId());
+		List<UserBorrowBook> history = userBorrowBookDao.getBorrowedTransitionByUser(user);
+		logger.info("[getAllBorrowHistoryByUser] - End");
+		return history;
+	}
 }

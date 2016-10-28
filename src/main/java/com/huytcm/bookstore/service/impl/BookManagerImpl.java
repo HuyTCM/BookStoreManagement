@@ -31,6 +31,19 @@ public class BookManagerImpl implements IBookManager {
 	private IAuthorManager authorManager;
 	@Autowired
 	private IBookCategoryManager bookCategoryManager;
+	
+	@Override
+	public void updateBook(Book book) {
+		bookDao.updateBook(book);
+	}
+	
+	@Override
+	public Book getBookById(long id) {
+		logger.info("[getBookById] - Start: id =" + id);
+		Book book = bookDao.getBookById(id);
+		logger.info("[getBookById] - End");
+		return book;
+	}
 
 	@Override
 	public List<Book> getAllBook() {

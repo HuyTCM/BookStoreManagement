@@ -66,10 +66,8 @@
 		<ul class="dropdown-menu pull-right dm-icon">
 			<li><a href="profile-about.html"><i
 					class="zmdi zmdi-account"></i> View Profile</a></li>
-			<li><a href="#"><i class="zmdi zmdi-input-antenna"></i>
-					Privacy Settings</a></li>
-			<li><a href="#"><i class="zmdi zmdi-settings"></i> Settings</a>
-			</li>
+			<li><a href="${pageContext.request.contextPath}/borrow-history"><i class="zmdi zmdi-input-antenna"></i>
+					History</a></li>
 			<li><a href="#"><i class="zmdi zmdi-time-restore"></i>
 					Logout</a></li>
 		</ul></li>

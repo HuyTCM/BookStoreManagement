@@ -136,8 +136,9 @@
 			<div class="modal-header">
 				<h4 class="modal-title">Modal title</h4>
 			</div>
-			<div class="modal-body">
-				<form action="" method="get">
+			<form action="borrow-book" method="get">
+				<div class="modal-body">
+
 					<input id="txtBookId" type="hidden" name="txtBookId" />
 					<p class="c-black f-500 m-b-20">From date</p>
 
@@ -149,12 +150,13 @@
 								class="form-control date-picker" placeholder="Click here...">
 						</div>
 					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-link">Save changes</button>
-				<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-			</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-link">Save changes</button>
+					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

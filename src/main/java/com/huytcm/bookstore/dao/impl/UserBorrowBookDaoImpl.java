@@ -2,6 +2,8 @@ package com.huytcm.bookstore.dao.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -25,6 +27,7 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 	}
 	
 	@Override
+	@Transactional
 	public void insertUserBorrowBook(UserBorrowBook userBorrowBook) {
 		logger.info("[insertUserBorrowBook] - Start");
 		insert(userBorrowBook);
@@ -32,6 +35,7 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 	}
 	
 	@Override
+	@Transactional
 	public void updateUserBorrowBook(UserBorrowBook userBorrowBook) {
 		logger.info("[updateUserBorrowBook] - Start: userBorrowBookId = " + userBorrowBook.getId());
 		update(userBorrowBook);
@@ -39,6 +43,7 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 	}
 	
 	@Override
+	@Transactional
 	public List<UserBorrowBook> getBorrowedTransitionByUser(User user) {
 		logger.info("[getBookIDBorrowedByUser] - Start: userId = " + user.getId());
 		Criteria criteria = getSession().createCriteria(UserBorrowBook.class);
@@ -50,6 +55,7 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 	}
 	
 	@Override
+	@Transactional
 	public UserBorrowBook currentTransitionBook(User user) {
 		logger.info("[currentTransitionBook] - Start: userId = " + user.getId());
 		Criteria criteria = getSession().createCriteria(UserBorrowBook.class);
