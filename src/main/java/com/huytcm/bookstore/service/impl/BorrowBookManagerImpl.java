@@ -35,6 +35,10 @@ public class BorrowBookManagerImpl implements IBorrowBookManager {
 			// A user can borrow only one book at a time
 			return false;
 		}
+		UserBorrowBook bookIsBorrowed = userBorrowBookDao.currentTransitionOfBook(book);
+		if (bookIsBorrowed != null) {
+			return false;
+		}
 		userBorrowedBook = new UserBorrowBook();
 
 		userBorrowedBook.setBookId(book.getId());

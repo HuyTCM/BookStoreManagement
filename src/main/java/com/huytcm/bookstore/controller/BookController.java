@@ -118,7 +118,7 @@ public class BookController {
 		}
 		borrowBookManager.userBorrowBook(user, book, fromDate);
 		try {
-			response.sendRedirect("grid-book");
+			response.sendRedirect("borrow-history");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

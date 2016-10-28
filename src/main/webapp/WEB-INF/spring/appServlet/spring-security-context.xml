@@ -18,7 +18,7 @@
 		<intercept-url pattern="/" access="isAuthenticated()" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/all-history" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/manageAccount" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/add-new-book" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/*" access="isAuthenticated()" />
 		
 

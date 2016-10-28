@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.huytcm.bookstore.dao.IUserBorrowBookDao;
+import com.huytcm.bookstore.model.Book;
 import com.huytcm.bookstore.model.User;
 import com.huytcm.bookstore.model.UserBorrowBook;
 
@@ -72,4 +73,15 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 		return borrowBook;
 	}
 	
+	@Override
+	@Transactional
+	public UserBorrowBook currentTransitionOfBook(Book book) {
+		logger.info("[currentTransitionBook] - Start: bookId = " + book.getId());
+		Criteria criteria = getSession().createCriteria(UserBorrowBook.class);
+		criteria.add(Restrictions.eq("bookId", book.getId()));
+		criteria.add(Restrictions.eq("isReturned", false));
+		UserBorrowBook bookIsBorrowed = (UserBorrowBook) criteria.uniqueResult();
+		logger.info("[currentTransitionBook] - End");
+		return bookIsBorrowed;
+	}
 }
