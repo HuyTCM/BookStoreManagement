@@ -36,6 +36,14 @@
 		<put-attribute name="current" value="borrow-history" />
 	</definition>
 	
+	<!-- all history -->
+	<!-- *************************************************************************** -->
+	<definition name="all-history" extends="base.definition">
+		<put-attribute name="title" value="History" />
+		<put-attribute name="body" value="/WEB-INF/views/all-history.jsp" />
+		<put-attribute name="current" value="all-history" />
+	</definition>
+	
 	<!-- Begin Book Detail -->
 	<!-- *************************************************************************** -->
 	<definition name="book-detail" extends="base.definition">

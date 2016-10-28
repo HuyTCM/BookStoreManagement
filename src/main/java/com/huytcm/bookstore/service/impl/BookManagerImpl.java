@@ -49,22 +49,22 @@ public class BookManagerImpl implements IBookManager {
 	public List<Book> getAllBook() {
 		logger.info("[getAllBook] - Start");
 		List<Book> books = bookDao.getAllBooks();
-		if (books.size() == 0) {
-			// create dummy data
-			logger.info("[getAllBook] - Start: create dummy data");
-			List<Author> authors = authorManager.getAllAuthor();
-			List<BookCategory> categories = bookCategoryManager.getAllBookCategory();
-
-			for (BookCategory category : categories) {
-				for (Author author : authors) {
-					String bookName = "Book about " + category.getName() + " of " + author.getName();
-					String description = "Book name " + bookName + " with short description about this book.";
-					addBook(bookName, description, authors, categories, Calendar.getInstance());
-				}
-			}
-			logger.info("[getAllBook] - End: create dummy data");
-			return bookDao.getAllBooks();
-		}
+//		if (books.size() == 0) {
+//			// create dummy data
+//			logger.info("[getAllBook] - Start: create dummy data");
+//			List<Author> authors = authorManager.getAllAuthor();
+//			List<BookCategory> categories = bookCategoryManager.getAllBookCategory();
+//
+//			for (BookCategory category : categories) {
+//				for (Author author : authors) {
+//					String bookName = "Book about " + category.getName() + " of " + author.getName();
+//					String description = "Book name " + bookName + " with short description about this book.";
+//					addBook(bookName, description, authors, categories, Calendar.getInstance());
+//				}
+//			}
+//			logger.info("[getAllBook] - End: create dummy data");
+//			return bookDao.getAllBooks();
+//		}
 		logger.info("[getAllBook] - End");
 		return books;
 	}

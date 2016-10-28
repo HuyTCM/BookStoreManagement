@@ -11,6 +11,7 @@ public interface IUserBorrowBookDao {
 	void updateUserBorrowBook(UserBorrowBook userBorrowBook);
 	
 	List<UserBorrowBook> getBorrowedTransitionByUser(User user);
+	List<UserBorrowBook> getAll();
 	
 	UserBorrowBook currentTransitionBook(User user);
 

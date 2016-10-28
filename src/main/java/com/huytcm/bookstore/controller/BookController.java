@@ -128,8 +128,6 @@ public class BookController {
 		logger.info("username = " + user.getUsername());
 		long id = Long.parseLong(bookId);
 		Book book = bookManager.getBookById(id);
-		book.setNumOfBorrowed(book.getNumOfBorrowed() + 1);
-		bookManager.updateBook(book);
 		logger.info("bookId = " + book.getId());
 		Calendar fromDate = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");

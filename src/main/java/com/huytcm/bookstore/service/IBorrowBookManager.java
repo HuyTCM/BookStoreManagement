@@ -13,5 +13,6 @@ public interface IBorrowBookManager {
 	void userReturnBook(User user, Book book, Calendar date);
 	
 	List<UserBorrowBook> getAllBorrowHistoryByUser(User user);
+	List<UserBorrowBook> getAll();
 
 }

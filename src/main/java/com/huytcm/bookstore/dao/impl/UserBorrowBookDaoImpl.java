@@ -55,6 +55,11 @@ public class UserBorrowBookDaoImpl extends BaseDaoImpl<UserBorrowBook, Long> imp
 	}
 	
 	@Override
+	public List<UserBorrowBook> getAll() {
+		return super.getAll();
+	}
+	
+	@Override
 	@Transactional
 	public UserBorrowBook currentTransitionBook(User user) {
 		logger.info("[currentTransitionBook] - Start: userId = " + user.getId());

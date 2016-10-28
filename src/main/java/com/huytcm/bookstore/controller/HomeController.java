@@ -101,4 +101,14 @@ public class HomeController {
 		return "borrow-history";
 	}
  	
+	
+	@RequestMapping(value = "/all-history")
+	public String getAllhistory(Model model) {
+		
+		List<UserBorrowBook> allHistory = borrowManager.getAll();
+		
+		model.addAttribute("ALLHISTORIES", allHistory);
+		
+		return "all-history";
+	}
 }

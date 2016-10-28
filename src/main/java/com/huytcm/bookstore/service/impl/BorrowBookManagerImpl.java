@@ -11,6 +11,7 @@ import com.huytcm.bookstore.dao.IUserBorrowBookDao;
 import com.huytcm.bookstore.model.Book;
 import com.huytcm.bookstore.model.User;
 import com.huytcm.bookstore.model.UserBorrowBook;
+import com.huytcm.bookstore.service.IBookManager;
 import com.huytcm.bookstore.service.IBorrowBookManager;
 
 @Service
@@ -18,6 +19,9 @@ public class BorrowBookManagerImpl implements IBorrowBookManager {
 
 	private static final Logger logger = Logger.getLogger(BorrowBookManagerImpl.class.getName());
 
+	@Autowired
+	IBookManager bookManager;
+	
 	@Autowired
 	IUserBorrowBookDao userBorrowBookDao;
 
@@ -55,6 +59,11 @@ public class BorrowBookManagerImpl implements IBorrowBookManager {
 			currTransition.setReturnDate(date);
 		}
 		
+		int currTransit = book.getNumOfBorrowed();
+		currTransit++;
+		book.setNumOfBorrowed(currTransit);
+		bookManager.updateBook(book);
+		
 		userBorrowBookDao.updateUserBorrowBook(currTransition);
 		
 		logger.info("[userReturnBook] - End");
@@ -66,5 +75,11 @@ public class BorrowBookManagerImpl implements IBorrowBookManager {
 		List<UserBorrowBook> history = userBorrowBookDao.getBorrowedTransitionByUser(user);
 		logger.info("[getAllBorrowHistoryByUser] - End");
 		return history;
+	}
+	
+	@Override
+	public List<UserBorrowBook> getAll() {
+		List<UserBorrowBook> listBorrow = userBorrowBookDao.getAll();
+		return listBorrow;
 	}
 }
